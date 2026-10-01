@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>P2_WE_PROBE</title></head>
+<body style="font-family:monospace;font-size:22px;padding:20px">
+<h2 style="color:red">WE BRIDGE PROBE</h2>
+<pre id="out" style="font-size:20px;line-height:1.8">running...</pre>
+<script>
+var lines = [];
+function probe(name){
+  try { lines.push(name + " = " + WE.triggerString(name)); }
+  catch(e){ lines.push(name + " ERR: " + e); }
+}
+lines.push("typeof WE = " + (typeof WE));
+if (typeof WE !== "undefined") {
+  probe("get_deviceid");
+  probe("get_encrypt_uid");
+  probe("get_shop_deviceid");
+  probe("get_device_name");
+  probe("get_miui_all_package");
+} else {
+  lines.push("WE not injected");
+}
+var t = lines.join(" | ");
+document.getElementById("out").textContent = lines.join("
+");
+document.title = "RESULT[" + t + "]";
+</script>
+</body></html>
